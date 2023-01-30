@@ -77,4 +77,48 @@ try {
 }
 })
 
+router.post("/translates",async(req,res)=>{
+  try {
+      const prompt = req.body.prompt;
+      const response = await openai.createCompletion({
+        model: "text-davinci-003",
+        prompt: prompt,
+        temperature: 0.3,
+        max_tokens: 100,
+        top_p: 1.0,
+        frequency_penalty: 0.0,
+        presence_penalty: 0.0,
+      });
+  
+        res.status(200).send({
+          bot: response.data.choices[0].text
+        });
+  } catch (error) {
+      console.log(error)
+      res.status(500).send({error})
+  }
+  })
+
+  router.post("/interview",async(req,res)=>{
+    try {
+        const prompt = req.body.prompt;
+        const response = await openai.createCompletion({
+          model: "text-davinci-003",
+          prompt: prompt,
+          temperature: 0.3,
+          max_tokens: 100,
+          top_p: 1.0,
+          frequency_penalty: 0.0,
+          presence_penalty: 0.0,
+        });
+    
+          res.status(200).send({
+            bot: response.data.choices[0].text
+          });
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({error})
+    }
+    })
+
 export default router;
